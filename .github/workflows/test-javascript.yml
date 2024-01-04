@@ -40,6 +40,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
           cache-dependency-path: package-lock.json
+      - run: npm install tree-sitter-java@0.20.2 -ddd
       - run: npm install -ddd
         if: ${{ matrix.os != 'windows-latest' }}
       - run: npm install --no-optional -ddd
