@@ -40,9 +40,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
           cache-dependency-path: package-lock.json
-      - run: npm install --loglevel verbose
+      - run: npm install -ddd
         if: ${{ matrix.os != 'windows-latest' }}
-      - run: npm install --no-optional --loglevel verbose
+      - run: npm install --no-optional -ddd
         if: ${{ matrix.os == 'windows-latest' }}
       - run: npm test
       - run: npm run eslint

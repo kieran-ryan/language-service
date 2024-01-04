@@ -55,7 +55,9 @@ if (!fs.existsSync(treeSitterCli)) {
     const module = path.join('node_modules', npm, dir)
 
     if (!fs.existsSync(module)) {
-      console.log(`Module ${module} does not exist`)
+      console.log(
+        `Module ${module} does not exist. It is likely not installed. Please check the logs.`
+      )
       process.exit(1)
     }
 
