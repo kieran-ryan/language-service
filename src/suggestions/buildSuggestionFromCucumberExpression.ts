@@ -16,7 +16,9 @@ export function buildSuggestionFromCucumberExpression(
 ): Suggestion {
   try {
     const compiledSegments = compile(expression.ast, registry, parameterChoices)
+    console.log('Compiled segments: ', compiledSegments)
     const segments = flatten(compiledSegments)
+    console.log('Segments: ', segments)
     return {
       label: expression.source,
       segments,
@@ -70,7 +72,12 @@ function compile(
     case NodeType.alternative:
       return compileAlternative(node, registry, parameterChoices)
     case NodeType.parameter:
-      return compileParameter(node, registry, parameterChoices)
+      // @ts-ignore
+      console.log("Parameter item: ", node.nodes[0].token)
+      console.log("Parameter choices: ", parameterChoices)
+      const compiled = compileParameter(node, registry, parameterChoices)
+      console.log("Compiled: ", compiled)
+      return compiled
     case NodeType.expression:
       return compileExpression(node, registry, parameterChoices)
     default:

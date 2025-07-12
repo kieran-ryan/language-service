@@ -8,7 +8,32 @@ import assert from 'assert'
 import { buildSuggestions } from '../../src/suggestions/buildSuggestions.js'
 import { Suggestion } from '../../src/suggestions/types.js'
 
-describe('buildSuggestions', () => {
+describe.only('buildSuggestions', () => {
+  it.only('build suggestions without quotes in parameter completions', () => {
+    const parameterTypeRegistry = new ParameterTypeRegistry()
+    const ef = new ExpressionFactory(parameterTypeRegistry)
+    const e1 = ef.createExpression('The {string} song')
+    const e2 = ef.createExpression('The {string} boat')
+
+    assertSuggestions(
+      parameterTypeRegistry,
+      ['The "nice" song', 'The "big" boat'],
+      [e1, e2],
+      [
+        {
+          label: 'The {string} boat',
+          segments: ['The "', ['big', 'nice'], '" boat'],
+          matched: true,
+        },
+        {
+          label: 'The {string} song',
+          segments: ['The "', ['big', 'nice'], '" song'],
+          matched: true,
+        },
+      ]
+    )
+  })
+
   it('builds suggestions with choices', () => {
     const parameterTypeRegistry = new ParameterTypeRegistry()
     const ef = new ExpressionFactory(parameterTypeRegistry)

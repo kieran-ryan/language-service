@@ -57,6 +57,7 @@ export function buildSuggestions(
 
   for (const expression of expressions) {
     if (expression instanceof CucumberExpression) {
+      console.log('Expression: ', expression)
       suggestions = suggestions.concat(
         buildSuggestionFromCucumberExpression(expression, registry, parameterChoices)
       )

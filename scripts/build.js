@@ -52,7 +52,7 @@ const distDir = 'dist'
 if (!fs.existsSync(distDir)) {
   fs.mkdirSync(distDir)
 }
-const treeSitterCli = path.join('node_modules', '.bin', 'tree-sitter')
+const treeSitterCli = path.join('.\\node_modules', '.bin', 'tree-sitter')
 if (!fs.existsSync(treeSitterCli)) {
   console.info(`Skipping compilation of tree-sitter wasms - ${treeSitterCli} is not installed`)
 } else {
